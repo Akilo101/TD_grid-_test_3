@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D3D6167E7FF73F28AFA7B2D52A1023401B51B640",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0C4C57D6395F85C10DA0A2235C0BDE5EB3E8A833" : 0,
+    "D3D6167E7FF73F28AFA7B2D52A1023401B51B640" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A6AE9A48-6F97-4221-9493-BF56C062FC0E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0C4C57D6395F85C10DA0A2235C0BDE5EB3E8A833" : "",
+    "D3D6167E7FF73F28AFA7B2D52A1023401B51B640" : "TD_grid%20_test_3\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TD_grid _test_1",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TD_grid _test_1.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PWNAGEP1E\/Tower-Defense-OFFICIAL",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0C4C57D6395F85C10DA0A2235C0BDE5EB3E8A833"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Akilo101\/TD_grid-_test_3.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D3D6167E7FF73F28AFA7B2D52A1023401B51B640"
+    }
+  ]
+}

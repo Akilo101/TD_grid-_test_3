@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     var level: Level!
     let TileWidth: CGFloat = 32.0
     let TileHeight: CGFloat = 32.0
@@ -25,6 +25,7 @@ class GameScene: SKScene {
     var oldRow: Int! = 3
     var legalTowerPlacement: Bool = false
     var legalTowerButtonTap: Bool = false
+    var levelNumber: Int = 1
     
     let croissantB = ButtonType(rawValue: 1)
     let cupcakeB = ButtonType(rawValue: 2)
@@ -322,7 +323,6 @@ class GameScene: SKScene {
         
         let touch = touches.first as UITouch!
         let location = touch.locationInNode(towersLayer)
-        
         let (success, column, row) = convertPoint(location) //We can use this to detect if a player has swipped on an existing tower
         if success {
             var towerType: TowerType
@@ -369,13 +369,152 @@ class GameScene: SKScene {
             SKAction.fadeOutWithDuration(0.3),
             SKAction.removeFromParent()]))
     }
+    
+    
+    
+    
+    
+    
 
 
+    override func didMoveToView(view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        createEnemies()
+    }
+    
+    deinit{
+        print("deinit called")
+    }
+    
+    
+    func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+    }
+    
+    func randomPointBetween(start:CGPoint, end:CGPoint)->CGPoint{//Helper method for spawning a point along the screen borders. This will not work for diagonal lines.
+        return CGPoint(x: randomBetweenNumbers(start.x, secondNum: end.x), y: randomBetweenNumbers(start.y, secondNum: end.y))
+    }
+    
+    
+    func createEnemies(){
+        //Randomize spawning time.
+        let wait = SKAction .waitForDuration(0.75, withRange: 0.1) //This will create a node every 0.75 +/- 0.1 seconds, means between 0.65 and 0.85 sec
+        weak var  weakSelf = self //Use weakSelf to break a possible strong reference cycle
+        let spawn = SKAction.runBlock({
+            
+            self.levelNumber = 1 //We will modify this select the level path
+            var position = CGPoint()
+            var moveTo1 = CGPoint()
+            var moveTo2 = CGPoint()
+            var moveTo3 = CGPoint()
+            var moveTo4 = CGPoint()
+            var moveTo5 = CGPoint()
+            var moveTo6 = CGPoint()
+            var moveTo7 = CGPoint()
+            var moveTo8 = CGPoint()
+            var moveTo9 = CGPoint()
+            var moveTo10 = CGPoint()
+            var offset:CGFloat = 40
+            switch self.levelNumber {
 
-
-
-
-
+            case 1: //Level 1
+                position = CGPoint(x: -500, y: -230)
+                moveTo1 = weakSelf!.randomPointBetween(CGPoint(x: -325, y: -230), end: CGPoint(x:-400, y: -270))
+                moveTo2 = weakSelf!.randomPointBetween(CGPoint(x: -325, y: 200), end: CGPoint(x:-400, y: 240))
+                moveTo3 = weakSelf!.randomPointBetween(CGPoint(x: -90, y: 200), end: CGPoint(x:-135, y: 190))
+                moveTo4 = CGPoint(x: -90, y: 90)
+                moveTo5 = weakSelf!.randomPointBetween(CGPoint(x: 100, y: 90), end: CGPoint(x: 75, y: 120))
+                moveTo6 = weakSelf!.randomPointBetween(CGPoint(x: 100, y: 200), end: CGPoint(x:65, y: 240))
+                moveTo7 = weakSelf!.randomPointBetween(CGPoint(x: 400, y: 200), end: CGPoint(x:450, y: 250))
+                moveTo8 = weakSelf!.randomPointBetween(CGPoint(x: 400, y: -240), end: CGPoint(x:400, y: -140))
+                moveTo9 = CGPoint(x: 40, y: -230)
+                moveTo10 = CGPoint(x: 40, y: -300)
+                
+                
+                break
+            default:
+                break
+            }
+            weakSelf!.spawnEnemyAtPosition(position,
+                moveTo1: moveTo1,
+                moveTo2: moveTo2,
+                moveTo3: moveTo3,
+                moveTo4: moveTo4,
+                moveTo5: moveTo5,
+                moveTo6: moveTo6,
+                moveTo7: moveTo7,
+                moveTo8: moveTo8,
+                moveTo9: moveTo9,
+                moveTo10: moveTo10)
+        })
+        let spawning = SKAction.sequence([wait,spawn])
+        self.runAction(SKAction.repeatActionForever(spawning), withKey:"spawning")
+    }
+    
+    
+    func spawnEnemyAtPosition(position:CGPoint, moveTo1: CGPoint, moveTo2: CGPoint, moveTo3: CGPoint, moveTo4: CGPoint, moveTo5: CGPoint, moveTo6: CGPoint, moveTo7: CGPoint, moveTo8: CGPoint, moveTo9: CGPoint, moveTo10: CGPoint){
+        
+        let enemy = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 40, height: 40))
+        enemy.position = position
+        enemy.physicsBody = SKPhysicsBody(rectangleOfSize: enemy.size)
+        enemy.physicsBody?.affectedByGravity = false
+        enemy.physicsBody?.dynamic = true
+        enemy.physicsBody?.collisionBitMask = 0 // no collisions
+        
+        //Find the distances between every point
+        let distance0_x = (position.x - moveTo1.x) * (position.x - moveTo1.x)
+        let distance0_y = (position.y - moveTo1.y) * (position.y - moveTo1.y)
+        let distance0 = Double(pow(Float(distance0_x + distance0_y), (0.5)))
+        let distance1_x = (moveTo1.x - moveTo2.x) * (moveTo1.x - moveTo2.x)
+        let distance1_y = (moveTo1.y - moveTo2.y) * (moveTo1.y - moveTo2.y)
+        let distance1 = Double(pow(Float(distance1_x + distance1_y), (0.5)))
+        let distance2_x = (moveTo2.x - moveTo3.x) * (moveTo2.x - moveTo3.x)
+        let distance2_y = (moveTo2.y - moveTo3.y) * (moveTo2.y - moveTo3.y)
+        let distance2 = Double(pow(Float(distance2_x + distance2_y), (0.5)))
+        let distance3_x = (moveTo3.x - moveTo4.x) * (moveTo3.x - moveTo4.x)
+        let distance3_y = (moveTo3.y - moveTo4.y) * (moveTo3.y - moveTo4.y)
+        let distance3 = Double(pow(Float(distance3_x + distance3_y), (0.5)))
+        let distance4_x = (moveTo4.x - moveTo5.x) * (moveTo4.x - moveTo5.x)
+        let distance4_y = (moveTo4.y - moveTo5.y) * (moveTo4.y - moveTo5.y)
+        let distance4 = Double(pow(Float(distance4_x + distance4_y), (0.5)))
+        let distance5_x = (moveTo5.x - moveTo6.x) * (moveTo5.x - moveTo6.x)
+        let distance5_y = (moveTo5.y - moveTo6.y) * (moveTo5.y - moveTo6.y)
+        let distance5 = Double(pow(Float(distance5_x + distance5_y), (0.5)))
+        let distance6_x = (moveTo6.x - moveTo7.x) * (moveTo6.x - moveTo7.x)
+        let distance6_y = (moveTo6.y - moveTo7.y) * (moveTo6.y - moveTo7.y)
+        let distance6 = Double(pow(Float(distance6_x + distance6_y), (0.5)))
+        let distance7_x = (moveTo7.x - moveTo8.x) * (moveTo7.x - moveTo8.x)
+        let distance7_y = (moveTo7.y - moveTo8.y) * (moveTo7.y - moveTo8.y)
+        let distance7 = Double(pow(Float(distance7_x + distance7_y), (0.5)))
+        let distance8_x = (moveTo8.x - moveTo9.x) * (moveTo8.x - moveTo9.x)
+        let distance8_y = (moveTo8.y - moveTo9.y) * (moveTo8.y - moveTo9.y)
+        let distance8 = Double(pow(Float(distance8_x + distance8_y), (0.5)))
+        let distance9_x = (moveTo9.x - moveTo10.x) * (moveTo9.x - moveTo10.x)
+        let distance9_y = (moveTo9.y - moveTo10.y) * (moveTo9.y - moveTo10.y)
+        let distance9 = Double(pow(Float(distance9_x + distance9_y), (0.5)))
+        
+        
+        
+        
+        //Move the enemy at a constant speed
+        let move1 = SKAction.moveTo(moveTo1, duration: distance0 / 50)
+        let move2 = SKAction.moveTo(moveTo2, duration: distance1 / 50)
+        let move3 = SKAction.moveTo(moveTo3, duration: distance2 / 50)
+        let move4 = SKAction.moveTo(moveTo4, duration: distance3 / 50)
+        let move5 = SKAction.moveTo(moveTo5, duration: distance4 / 50)
+        let move6 = SKAction.moveTo(moveTo6, duration: distance5 / 50)
+        let move7 = SKAction.moveTo(moveTo7, duration: distance6 / 50)
+        let move8 = SKAction.moveTo(moveTo8, duration: distance7 / 50)
+        let move9 = SKAction.moveTo(moveTo9, duration: distance8 / 50)
+        let move10 = SKAction.moveTo(moveTo10, duration: distance9 / 50)
+        let delEnemy = SKAction.removeFromParent()
+        
+        let moveToSequence = SKAction.sequence([move1, move2, move3, move4, move5, move6, move7, move8, move9, move10, delEnemy])
+        //enemy.runAction(SKAction.sequence([move]))
+        enemy.runAction(moveToSequence)
+        
+        self.addChild(enemy)
+    }
 
 
 }
