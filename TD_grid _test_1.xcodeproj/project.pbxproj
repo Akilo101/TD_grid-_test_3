@@ -13,6 +13,7 @@
 		942B2BBD1CBE94FE00DB84A1 /* Level_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 942B2BB81CBE94FE00DB84A1 /* Level_2.json */; };
 		942B2BBE1CBE94FE00DB84A1 /* Level_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 942B2BB91CBE94FE00DB84A1 /* Level_3.json */; };
 		942B2BBF1CBE94FE00DB84A1 /* Level_4.json in Resources */ = {isa = PBXBuildFile; fileRef = 942B2BBA1CBE94FE00DB84A1 /* Level_4.json */; };
+		9455571C1CF3365100D9556D /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455571B1CF3365100D9556D /* Enemy.swift */; };
 		94710F431CC5504C007053E5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94710F421CC5504C007053E5 /* Button.swift */; };
 		947F3B651CBD314900173C1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F3B641CBD314900173C1A /* AppDelegate.swift */; };
 		947F3B691CBD314900173C1A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F3B681CBD314900173C1A /* GameScene.swift */; };
@@ -26,6 +27,10 @@
 		947F3B831CBD352B00173C1A /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 947F3B821CBD352B00173C1A /* Sprites.atlas */; };
 		947F3B871CBD358000173C1A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F3B861CBD358000173C1A /* Tile.swift */; };
 		94B424431CC8FF930097C9FC /* ButtonSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B424421CC8FF930097C9FC /* ButtonSpace.swift */; };
+		94C30ACC1CF4A59F0041C118 /* Sombraro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C30ACB1CF4A59F0041C118 /* Sombraro.swift */; };
+		94C30ACE1CF4A5C90041C118 /* Enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C30ACD1CF4A5C90041C118 /* Enemy.png */; };
+		94C30AD01CF4A5D50041C118 /* rsz_sombraro.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C30ACF1CF4A5D50041C118 /* rsz_sombraro.png */; };
+		94C30AD21CF5F7FC0041C118 /* EnemyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C30AD11CF5F7FC0041C118 /* EnemyGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +40,7 @@
 		942B2BB81CBE94FE00DB84A1 /* Level_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_2.json; sourceTree = "<group>"; };
 		942B2BB91CBE94FE00DB84A1 /* Level_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_3.json; sourceTree = "<group>"; };
 		942B2BBA1CBE94FE00DB84A1 /* Level_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_4.json; sourceTree = "<group>"; };
+		9455571B1CF3365100D9556D /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		94710F421CC5504C007053E5 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		947F3B611CBD314800173C1A /* TD_grid _test_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TD_grid _test_1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		947F3B641CBD314900173C1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +56,10 @@
 		947F3B821CBD352B00173C1A /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Sprites.atlas; path = ../Sprites.atlas; sourceTree = "<group>"; };
 		947F3B861CBD358000173C1A /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tile.swift; path = ../Tile.swift; sourceTree = "<group>"; };
 		94B424421CC8FF930097C9FC /* ButtonSpace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonSpace.swift; sourceTree = "<group>"; };
+		94C30ACB1CF4A59F0041C118 /* Sombraro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sombraro.swift; sourceTree = "<group>"; };
+		94C30ACD1CF4A5C90041C118 /* Enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Enemy.png; sourceTree = "<group>"; };
+		94C30ACF1CF4A5D50041C118 /* rsz_sombraro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rsz_sombraro.png; sourceTree = "<group>"; };
+		94C30AD11CF5F7FC0041C118 /* EnemyGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +106,7 @@
 			children = (
 				947F3B641CBD314900173C1A /* AppDelegate.swift */,
 				947F3B681CBD314900173C1A /* GameScene.swift */,
+				94C30ACB1CF4A59F0041C118 /* Sombraro.swift */,
 				947F3B7C1CBD324500173C1A /* Array2D.swift */,
 				942B2BA91CBE936B00DB84A1 /* Level.swift */,
 				947F3B7E1CBD326100173C1A /* Extensions.swift */,
@@ -103,7 +114,11 @@
 				94710F421CC5504C007053E5 /* Button.swift */,
 				94B424421CC8FF930097C9FC /* ButtonSpace.swift */,
 				947F3B801CBD32AE00173C1A /* Tower.swift */,
+				9455571B1CF3365100D9556D /* Enemy.swift */,
+				94C30AD11CF5F7FC0041C118 /* EnemyGroup.swift */,
 				947F3B861CBD358000173C1A /* Tile.swift */,
+				94C30ACF1CF4A5D50041C118 /* rsz_sombraro.png */,
+				94C30ACD1CF4A5C90041C118 /* Enemy.png */,
 				947F3B6F1CBD314900173C1A /* Assets.xcassets */,
 				947F3B6C1CBD314900173C1A /* Main.storyboard */,
 				942B2BAB1CBE945900DB84A1 /* Levels */,
@@ -172,10 +187,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94C30AD01CF4A5D50041C118 /* rsz_sombraro.png in Resources */,
 				942B2BBD1CBE94FE00DB84A1 /* Level_2.json in Resources */,
 				942B2BBB1CBE94FE00DB84A1 /* Level_0.json in Resources */,
 				942B2BBF1CBE94FE00DB84A1 /* Level_4.json in Resources */,
 				947F3B731CBD314900173C1A /* LaunchScreen.storyboard in Resources */,
+				94C30ACE1CF4A5C90041C118 /* Enemy.png in Resources */,
 				947F3B701CBD314900173C1A /* Assets.xcassets in Resources */,
 				942B2BBC1CBE94FE00DB84A1 /* Level_1.json in Resources */,
 				942B2BBE1CBE94FE00DB84A1 /* Level_3.json in Resources */,
@@ -194,12 +211,15 @@
 				947F3B691CBD314900173C1A /* GameScene.swift in Sources */,
 				947F3B7F1CBD326100173C1A /* Extensions.swift in Sources */,
 				947F3B6B1CBD314900173C1A /* GameViewController.swift in Sources */,
+				9455571C1CF3365100D9556D /* Enemy.swift in Sources */,
 				947F3B871CBD358000173C1A /* Tile.swift in Sources */,
 				94B424431CC8FF930097C9FC /* ButtonSpace.swift in Sources */,
 				947F3B811CBD32AE00173C1A /* Tower.swift in Sources */,
 				947F3B651CBD314900173C1A /* AppDelegate.swift in Sources */,
 				942B2BAA1CBE936B00DB84A1 /* Level.swift in Sources */,
 				94710F431CC5504C007053E5 /* Button.swift in Sources */,
+				94C30ACC1CF4A59F0041C118 /* Sombraro.swift in Sources */,
+				94C30AD21CF5F7FC0041C118 /* EnemyGroup.swift in Sources */,
 				947F3B7D1CBD324500173C1A /* Array2D.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
