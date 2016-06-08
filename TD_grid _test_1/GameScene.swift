@@ -24,6 +24,7 @@ import UIKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var level: Level!
     var enemyGroup = EnemyGroup()
+    var towerGroup = TowerGroup()
     let TileWidth: CGFloat = 32.0
     let TileHeight: CGFloat = 32.0
     let tilesLayer = SKNode()
@@ -59,6 +60,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var leastDistanceToEnemy: [Double] = []
     
     
+    var lives: Int = 50
+    var money: Int = 100
+    
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder) is not used in this app")
@@ -67,7 +73,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override init(size: CGSize) {
         super.init(size: size)
-        let background = SKSpriteNode(imageNamed: "Background") //Load The background
+        let background = SKSpriteNode(imageNamed: "Official Background") //Load The background
         background.size = size
         
         addChild(background)
@@ -227,7 +233,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first as UITouch!
         let towerLocation = touch.locationInNode(towersLayer)
+        let enemyLocation = touch.locationInNode(enemiesLayer)
+        let potato = touch.locationInNode(tilesLayer)
         let normalTile = SKSpriteNode(imageNamed: "Tile") //Load The highlighted tile
+        
+        
+        
+        
         
         var (success, column, row) = convertPoint(towerLocation)
         if success {
@@ -290,30 +302,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             
                             if buttonType == croissantB {
                                 towerType = croissantT!
+                                let cost = 100
                                 if legalTowerPlacement == true && legalTowerButtonTap == true {
-                                    let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
-                                    addSpritesForTowers(newTower)
+                                    if money >= cost {
+                                        money -= cost
+                                        let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
+                                        addSpritesForTowers(newTower)
+                                    }
                                 }
                             }
                             if buttonType == cupcakeB {
                                 towerType = cupcakeT!
+                                let cost = 150
                                 if legalTowerPlacement == true && legalTowerButtonTap == true {
-                                    let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
-                                    addSpritesForTowers(newTower)
+                                    if money >= cost {
+                                        money -= cost
+                                        let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
+                                        addSpritesForTowers(newTower)
+                                    }
                                 }
                             }
                             if buttonType == danishB {
                                 towerType = danishT!
+                                let cost = 175
                                 if legalTowerPlacement == true && legalTowerButtonTap == true {
-                                    let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
-                                    addSpritesForTowers(newTower)
+                                    if money >= cost {
+                                        money -= cost
+                                        let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
+                                        addSpritesForTowers(newTower)
+                                    }
                                 }
                             }
                             if buttonType == donutB {
                                 towerType = donutT!
+                                let cost = 250
                                 if legalTowerPlacement == true && legalTowerButtonTap == true {
-                                    let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
-                                    addSpritesForTowers(newTower)
+                                    if money >= cost {
+                                        money -= cost
+                                        let newTower = level.placeTower(selectedColumn, row: selectedRow, towerType: towerType)
+                                        addSpritesForTowers(newTower)
+                                    }
                                 }
                             }
                         }
@@ -453,7 +481,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch self.levelNumber {
 
             case 1: //Level 1
-                moveTo0 = CGPoint(x: -500, y: -230)
+                //moveTo0 = CGPoint(x: 432, y: 84)
+                //moveTo1 = CGPoint(x: -512, y: 384)
+                moveTo0 = CGPoint(x: -512, y: -230)
                 moveTo1 = weakSelf!.randomPointBetween(CGPoint(x: -325, y: -230), end: CGPoint(x:-400, y: -270))
                 moveTo2 = weakSelf!.randomPointBetween(CGPoint(x: -325, y: 200), end: CGPoint(x:-400, y: 240))
                 moveTo3 = weakSelf!.randomPointBetween(CGPoint(x: -90, y: 200), end: CGPoint(x:-135, y: 190))
@@ -519,6 +549,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Move the enemy at a constant speed
         let move1 = SKAction.moveTo(moveTo1, duration: distance0 / 50)
+        //let move1 = SKAction.moveTo(moveTo1, duration: 5000)
         let move2 = SKAction.moveTo(moveTo2, duration: distance1 / 50)
         let move3 = SKAction.moveTo(moveTo3, duration: distance2 / 50)
         let move4 = SKAction.moveTo(moveTo4, duration: distance3 / 50)
@@ -546,6 +577,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyGroupPosition.removeAll()
         for enemy in enemyGroup.enemies {
             enemyGroupPosition.append(enemy.position)
+            
         }
     }
     
@@ -569,72 +601,84 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
 
-    func calculateDistanceToEnemy() { //Calculates the distances to each enemy and returns the enemies that must be attacked
+    func calculateDistanceToEnemy() { //Calculates the distances to each enemy and attacks them
+        var indexT = 0
         for tower in towerGroupPosition {
             distanceToEnemy.removeAll()
             leastDistanceToEnemy.removeAll()
-            var index = 0
+            var indexE = 0
             var shortestDistance = 10000
             var shortestIndex = 0
-            
+            var damage: Int = 0
+            var inRange: Bool = false
             
             
             for enemy in enemyGroup.enemies {
-                let distance = distanceBetweenPoints(tower, point2: enemy.position) //Finds the distances from the tower to the enemy
+                
+                let normalEnemyPosition = convertEnemyToNormal(enemy.position)
+                let distance = distanceBetweenPoints(tower, point2: normalEnemyPosition) //Finds the distances from the tower to the enemy
                 if Int(distance) < shortestDistance {
                     shortestDistance = Int(distance)
-                    shortestIndex = index
-                    //print(shortestDistance)
+                    shortestIndex = indexE
+                    //print(enemy.health)
                 }
-                index += 1
-                print(enemy.position)
+                indexE += 1
+                
                 
                 
                 
                 distanceToEnemy.append(distance)
-                //leastDistanceToEnemy.append(distance)
             }
-            print("New")
-            //print(shortestIndex)
-            //print(enemyGroup.enemies)
+            indexT += 1
+            //Found closest enemy
+            
             
             
             let targetEnemy = enemyGroup.enemies[shortestIndex]
             
-            //print(targetEnemy.position)
             
-            let sprite = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: 10, height: 10))
-            sprite.position = targetEnemy.position
-            addChild(sprite)
-            
-            
-            /*
-            leastDistanceToEnemy.sortInPlace() { (element1, element2) -> Bool in //Orders the array of distances to the current tower from least to most
-                return element1 < element2
+            let (success, column, row) = convertPoint(tower) //Checks to see if the closest enemy is in range
+            if success {
+                
+                if let tower = level.towerAtColumn(column, row: row) {
+                    
+                    damage = tower.damage
+                    if shortestDistance <= tower.range {
+                        inRange = true
+                    }
+                }
+
             }
             
-            let least = leastDistanceToEnemy[0]
             
-            for normal in distanceToEnemy {
-                if least == normal {
-                    let targetEnemy = distanceToEnemy.indexOf(least)
-                    print(least)
-                    print(leastDistanceToEnemy)
-                    print(targetEnemy)
-                    */
-                    
-                    
-                    
-                    
-                    
-                                //Check to see if it tracks the closest enemy
-                    //let sprite = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: 10, height: 10))
-                    //sprite.position = enemyGroupPosition[targetEnemy!]
-                    //addChild(sprite)
-              //  }
-            //}
+            if inRange == true { //Deals Enemies damage
+                dealEnemiesDamage(targetEnemy, damage: damage)
+            }
+            
         }
     }
+    
+    
+    
+    func convertEnemyToNormal(position: CGPoint) -> CGPoint {
+        let xEnemy = position.x
+        let yEnemy = position.y
+        let xNormal = xEnemy + 512
+        let yNormal = yEnemy + 384
+        let normalPosition = CGPointMake(xNormal, yNormal)
+        
+        return normalPosition
+    }
+    
+    func dealEnemiesDamage(enemy: Enemy, damage: Int) { //Deals enemies damage
+        enemy.health -= damage
+        if enemy.health <= 0 {
+            enemy.removeFromParent()
+            enemy.position = CGPointMake(100000, 1000000)
+            money += 25
+        }
+    }
+    
     
     
     
@@ -654,6 +698,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         findEnemyPositions()
         findTowerPositions()
         calculateDistanceToEnemy()
+        print("money \(money)")
         
         
         

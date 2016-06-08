@@ -14,6 +14,11 @@ let NumColumns = 32
 let NumRows = 24
 let MaxRoundedColumns = 5
 
+let croissantT = TowerType(rawValue: 1)
+let cupcakeT = TowerType(rawValue: 2)
+let danishT = TowerType(rawValue: 3)
+let donutT = TowerType(rawValue: 4)
+
 class Level {
     
     private var towers = Array2D<Tower>(columns: NumColumns, rows: NumRows)
@@ -73,7 +78,29 @@ class Level {
     func placeTower(column: Int, row: Int, towerType: TowerType) -> Set<Tower> {
         var set = Set<Tower>()
         if tiles[column, row] != nil {
-            let tower = Tower(column: column, row: row, towerType: towerType)
+            
+            var damage: Int = 0
+            var range: Int = 0
+            if towerType == croissantT {
+                damage = 150
+                range = 70
+            }
+            if towerType == cupcakeT {
+                damage = 100
+                range = 100
+            }
+            if towerType == danishT {
+                damage = 80
+                range = 120
+            }
+            if towerType == donutT {
+                damage = 120
+                range = 80
+            }
+            
+            
+            
+            let tower = Tower(column: column, row: row, towerType: towerType, damage: damage, range: range)
             towers[column, row] = tower
             towers[column + 1, row] = tower
             towers[column + 1, row + 1] = tower

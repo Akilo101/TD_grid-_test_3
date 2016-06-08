@@ -15,6 +15,8 @@
 		942B2BBF1CBE94FE00DB84A1 /* Level_4.json in Resources */ = {isa = PBXBuildFile; fileRef = 942B2BBA1CBE94FE00DB84A1 /* Level_4.json */; };
 		9455571C1CF3365100D9556D /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455571B1CF3365100D9556D /* Enemy.swift */; };
 		94710F431CC5504C007053E5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94710F421CC5504C007053E5 /* Button.swift */; };
+		94720AC91D06008500DC5018 /* Official Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 94720AC81D06008500DC5018 /* Official Background.png */; };
+		94720ACB1D06052200DC5018 /* TowerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94720ACA1D06052200DC5018 /* TowerGroup.swift */; };
 		947F3B651CBD314900173C1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F3B641CBD314900173C1A /* AppDelegate.swift */; };
 		947F3B691CBD314900173C1A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F3B681CBD314900173C1A /* GameScene.swift */; };
 		947F3B6B1CBD314900173C1A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F3B6A1CBD314900173C1A /* GameViewController.swift */; };
@@ -42,6 +44,8 @@
 		942B2BBA1CBE94FE00DB84A1 /* Level_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_4.json; sourceTree = "<group>"; };
 		9455571B1CF3365100D9556D /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		94710F421CC5504C007053E5 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		94720AC81D06008500DC5018 /* Official Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Official Background.png"; sourceTree = "<group>"; };
+		94720ACA1D06052200DC5018 /* TowerGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowerGroup.swift; sourceTree = "<group>"; };
 		947F3B611CBD314800173C1A /* TD_grid _test_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TD_grid _test_1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		947F3B641CBD314900173C1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		947F3B681CBD314900173C1A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -114,11 +118,13 @@
 				94710F421CC5504C007053E5 /* Button.swift */,
 				94B424421CC8FF930097C9FC /* ButtonSpace.swift */,
 				947F3B801CBD32AE00173C1A /* Tower.swift */,
+				94720ACA1D06052200DC5018 /* TowerGroup.swift */,
 				9455571B1CF3365100D9556D /* Enemy.swift */,
 				94C30AD11CF5F7FC0041C118 /* EnemyGroup.swift */,
 				947F3B861CBD358000173C1A /* Tile.swift */,
 				94C30ACF1CF4A5D50041C118 /* rsz_sombraro.png */,
 				94C30ACD1CF4A5C90041C118 /* Enemy.png */,
+				94720AC81D06008500DC5018 /* Official Background.png */,
 				947F3B6F1CBD314900173C1A /* Assets.xcassets */,
 				947F3B6C1CBD314900173C1A /* Main.storyboard */,
 				942B2BAB1CBE945900DB84A1 /* Levels */,
@@ -161,6 +167,7 @@
 				TargetAttributes = {
 					947F3B601CBD314800173C1A = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 9AVH393A44;
 					};
 				};
 			};
@@ -198,6 +205,7 @@
 				942B2BBE1CBE94FE00DB84A1 /* Level_3.json in Resources */,
 				947F3B831CBD352B00173C1A /* Sprites.atlas in Resources */,
 				947F3B6E1CBD314900173C1A /* Main.storyboard in Resources */,
+				94720AC91D06008500DC5018 /* Official Background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +221,7 @@
 				947F3B6B1CBD314900173C1A /* GameViewController.swift in Sources */,
 				9455571C1CF3365100D9556D /* Enemy.swift in Sources */,
 				947F3B871CBD358000173C1A /* Tile.swift in Sources */,
+				94720ACB1D06052200DC5018 /* TowerGroup.swift in Sources */,
 				94B424431CC8FF930097C9FC /* ButtonSpace.swift in Sources */,
 				947F3B811CBD32AE00173C1A /* Tower.swift in Sources */,
 				947F3B651CBD314900173C1A /* AppDelegate.swift in Sources */,
@@ -333,9 +342,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "TD_grid _test_1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.indicane.TD-grid--test-1.TD-grid--test-1";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.indicane.TD-grid-test-1.TD-grid--test-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -344,9 +354,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "TD_grid _test_1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.indicane.TD-grid--test-1.TD-grid--test-1";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.indicane.TD-grid-test-1.TD-grid--test-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

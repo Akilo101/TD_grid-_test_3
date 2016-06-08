@@ -47,11 +47,15 @@ class Tower: CustomStringConvertible, Hashable {
     var row: Int
     let towerType: TowerType
     var sprite: SKSpriteNode?
+    var damage: Int
+    var range: Int
     
-    init(column: Int, row: Int, towerType: TowerType) {
+    init(column: Int, row: Int, towerType: TowerType, damage: Int, range: Int) {
         self.column = column
         self.row = row
         self.towerType = towerType
+        self.damage = damage
+        self.range = range
     }
 }
 func ==(lhs: Tower, rhs: Tower) -> Bool {

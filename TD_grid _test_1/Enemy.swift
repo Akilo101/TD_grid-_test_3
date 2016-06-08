@@ -10,13 +10,15 @@ import UIKit
 import SpriteKit
 
 class Enemy: SKSpriteNode {
-    var health:Int = 100
-    var damageToPlayer:Int = 10
+    var health: Int = 10000
+    var damageToPlayer: Int = 10
     
     init() {
         var image = SKTexture(imageNamed: "rsz_sombraro")
         super.init(texture: image, color: UIColor.clearColor(), size:image.size())
     }
+    
+    
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
